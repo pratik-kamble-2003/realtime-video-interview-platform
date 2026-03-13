@@ -12,14 +12,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@clerk/express": "^1.7.41",
-    "cors": "^2.8.6",
-    "dotenv": "^17.3.1",
-    "express": "^5.2.1",
-    "inngest": "^3.52.6",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "inngest": "^3.44.3",
     "mern-project": "file:..",
-    "mongoose": "^8.23.0",
-    "stream-chat": "^9.36.0"
+    "mongoose": "^8.19.1",
+    "stream-chat": "^9.24.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
