@@ -2,6 +2,8 @@ import express from "express";
 import path from "path";
 import { ENV } from "./lib/env.js";
 import { connectDB } from "./lib/db.js";
+import { serve } from "inngest/express";
+import { inngest, functions } from "./lib/inngest.js";
 
 const app = express();
 
@@ -14,6 +16,8 @@ app.get("/health", (req, res) => {
 app.get("/books", (req, res) => {
     res.status(200).json({ msg: "this is the books end point" });
 });
+
+app.use("/api/inngest", serve({ client: inngest, functions }));
 
 // make our app ready for deployment
 if(ENV.NODE_ENV === "production") {
