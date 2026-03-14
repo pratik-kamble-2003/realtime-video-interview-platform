@@ -2,6 +2,7 @@ import { SignedIn, SignedOut, SignInButton, SignOutButton, UserButton, useUser }
 import { Navigate, Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import ProblemsPage from './pages/ProblemsPage';
+import ProblemPage from "./pages/ProblemPage";
 import DashboardPage from "./pages/DashboardPage";
 import { Toaster } from "react-hot-toast";
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/dashboard" element={isSignedIn ? <DashboardPage /> : <Navigate to={"/"} />} />
 
         <Route path="/problems" element={isSignedIn ? <ProblemsPage /> : <Navigate to={"/"}/>} />
+        <Route path="/problem/:id" element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"}/>} />
 
       </Routes>
 
