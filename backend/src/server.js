@@ -9,6 +9,7 @@ import { clerkMiddleware } from '@clerk/express'
 import chatRoutes from "./routes/chatRoutes.js";
 import sessionRoutes from "./routes/sessionRoutes.js";
 
+
 const app = express();
 
 const __dirname = path.resolve();
