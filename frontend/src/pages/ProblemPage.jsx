@@ -30,9 +30,9 @@ const executeCode = async (language, code) => {
     const data = await response.json();
 
     return {
-      success: true,
-      output: data.stdout || data.stderr || data.compile_output
-    };
+    success: true,
+    output: data.output
+  };
 
   } catch (error) {
     return {

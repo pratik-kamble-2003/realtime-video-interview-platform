@@ -1,12 +1,13 @@
-import { useUser, useAuth } from "@clerk/clerk-react";
-import { Navigate, Routes, Route } from "react-router-dom";
+import { useAuth, useUser } from "@clerk/clerk-react";
 import { useEffect } from "react";
-import HomePage from './pages/HomePage';
-import ProblemsPage from './pages/ProblemsPage';
-import ProblemPage from "./pages/ProblemPage";
-import DashboardPage from "./pages/DashboardPage";
 import { Toaster } from "react-hot-toast";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { setupAxiosInterceptor } from "./lib/axios";
+import DashboardPage from "./pages/DashboardPage";
+import HomePage from './pages/HomePage';
+import ProblemPage from "./pages/ProblemPage";
+import ProblemsPage from './pages/ProblemsPage';
+import SessionPage from "./pages/SessionPage";
 
 function App() {
   const { isSignedIn, isLoaded } = useUser();
@@ -25,6 +26,7 @@ function App() {
         <Route path="/dashboard" element={isSignedIn ? <DashboardPage /> : <Navigate to={"/"} />} />
         <Route path="/problems" element={isSignedIn ? <ProblemsPage /> : <Navigate to={"/"}/>} />
         <Route path="/problem/:id" element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"}/>} />
+        <Route path="/session/:id" element={isSignedIn ? <SessionPage /> : <Navigate to={"/"}/>} />
       </Routes>
       <Toaster position="top-right" toastOptions={{duration: 3000}} />
     </>
