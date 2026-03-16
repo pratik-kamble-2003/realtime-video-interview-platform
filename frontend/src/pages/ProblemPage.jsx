@@ -7,10 +7,40 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import ProblemDescription from "../components/ProblemDescription";
 import OutputPanel from "../components/OutputPanel";
 import CodeEditorPanel from "../components/CodeEditorPanel";
-import { executeCode } from "../lib/piston";
 
 import toast from "react-hot-toast";
 import confetti from "canvas-confetti";
+
+const executeCode = async (language, code) => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/execute/run`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          language,
+          code
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    return {
+      success: true,
+      output: data.stdout || data.stderr || data.compile_output
+    };
+
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+};
 
 function ProblemPage() {
   const { id } = useParams();
