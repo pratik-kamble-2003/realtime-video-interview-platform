@@ -79,13 +79,33 @@ function SessionPage() {
   };
 
   const handleRunCode = async () => {
-    setIsRunning(true);
-    setOutput(null);
+  setIsRunning(true);
+  setOutput(null);
 
-    const result = await executeCode(selectedLanguage, code);
-    setOutput(result);
+  try {
+    const response = await fetch("/api/execute/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        language: selectedLanguage,
+        code: code,
+        stdin: "",
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setOutput({ error: data.error || "Execution failed" });
+    } else {
+      setOutput({ success: true, output: data.output, error: null })
+    }
+  } catch (error) {
+    setOutput({ error: error.message });
+  } finally {
     setIsRunning(false);
-  };
+  }
+};
 
   const handleEndSession = () => {
     if (confirm("Are you sure you want to end this session? All participants will be notified.")) {
