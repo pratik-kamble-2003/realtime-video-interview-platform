@@ -82,16 +82,16 @@ function SessionPage() {
   setIsRunning(true);
   setOutput(null);
 
-  try {
-    const response = await fetch("/api/execute/run", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        language: selectedLanguage,
-        code: code,
-        stdin: "",
-      }),
-    });
+try {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/execute/run`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      language: selectedLanguage,
+      code: code,
+      stdin: "",
+    }),
+  });
 
     const data = await response.json();
 
